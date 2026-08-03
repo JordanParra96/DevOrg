@@ -23,17 +23,9 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const branchName = context.payload.pull_request.head.ref;
-            let labelToAdd = '';
-
-            if (branchName.startsWith('enh_')) {
-              labelToAdd = 'enhancement';
-            } else if (branchName.startsWith('mod_')) {
-              labelToAdd = 'module';
-            } else if (branchName.startsWith('proj_')) {
-              labelToAdd = 'project';
-            } else if (branchName.startsWith('dep_')) {
-              labelToAdd = 'dependencies';
-            }
+            const branchType = branchName.split('/')[0];
+            const validLabels = ['enhancement', 'module', 'project', 'dependencies'];
+            const labelToAdd = validLabels.includes(branchType) ? branchType : '';
 
             if (labelToAdd) {
               await github.rest.issues.addLabels({

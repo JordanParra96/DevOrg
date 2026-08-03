@@ -27,13 +27,13 @@ Extrae: paquete (`dependency.package.name`), ecosistema, `manifest_path`, versi�
 
 ## 3. Crear la rama desde master
 
-Sigue el patrón de nombres ya usado en el repo (revisa `git log --oneline -20` si tienes dudas):
+Sigue el patrón de nombres ya usado en el repo (revisa `git log --oneline -20` si tienes dudas): el prefijo antes de la `/` es lo que el workflow `.github/workflows/ci-pr.yml` usa para etiquetar el PR automáticamente, así que debe coincidir exactamente con el nombre del label.
 
-- Fix de dependencia → prefijo `dep_` (ej. `dep_postCssIssue`, `dep_yamlIssue`, `dep_braceExpansionIssue`). Si ya existe una rama/PR previo para el mismo paquete por otra vulnerabilidad distinta, añade un sufijo descriptivo (ej. `dep_postCssPathTraversalIssue`) para no chocar.
-- El nombre en camelCase, terminando en `Issue`.
+- Fix de dependencia → prefijo `dependencies/` (ej. `dependencies/postCssIssue`, `dependencies/yamlIssue`, `dependencies/braceExpansionIssue`). Si ya existe una rama/PR previo para el mismo paquete por otra vulnerabilidad distinta, añade un sufijo descriptivo (ej. `dependencies/postCssPathTraversalIssue`) para no chocar.
+- La parte después de la `/` en camelCase, terminando en `Issue`.
 
 ```
-git checkout -b dep_<paqueteEnCamelCase>Issue
+git checkout -b dependencies/<paqueteEnCamelCase>Issue
 ```
 
 ## 4. Ubicar y actualizar la dependencia
